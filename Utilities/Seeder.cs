@@ -10,6 +10,7 @@ namespace StarDMS.Utilities
         {
             // Ids
             var alvanId = Guid.NewGuid(); // admin
+            var samilId = Guid.NewGuid(); // admin
             var samirId = Guid.NewGuid();
             var cola = Guid.NewGuid();
             var fanta = Guid.NewGuid();
@@ -24,6 +25,12 @@ namespace StarDMS.Utilities
                     Id = alvanId,
                     Name = "Alvan Rahimli",
                     Password = "alvan12345"
+                },
+                new Admin()
+                {
+                    Id = samilId,
+                    Name = "Samil",
+                    Password = "samil12345"
                 }
             );
 

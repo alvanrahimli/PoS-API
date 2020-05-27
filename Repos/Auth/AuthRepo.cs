@@ -142,7 +142,7 @@ namespace StarDMS.Repos.Auth
                 new Claim(JwtRegisteredClaimNames.Sub, sellerInfo.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Aud, _config["Jwt:Audience"]),
-                new Claim(ClaimTypes.Role, "seller")
+                new Claim(type: "roles", "seller")
             };
 
             var token = new JwtSecurityToken(
@@ -167,7 +167,7 @@ namespace StarDMS.Repos.Auth
                 new Claim(JwtRegisteredClaimNames.Sub, adminInfo.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Aud, _config["Jwt:Audience"]),
-                new Claim(ClaimTypes.Role, "admin")
+                new Claim(type: "roles", "admin")
             };
 
             var token = new JwtSecurityToken(

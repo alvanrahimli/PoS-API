@@ -9,7 +9,6 @@ namespace StarDMS.Models.Dtos
         [StringLength(13)]
         public string Barcode { get; set; }
         [Required]
-        [StringLength(13)]
         public string Name { get; set; }
         public int Count { get; set; }
         [StringLength(300)]

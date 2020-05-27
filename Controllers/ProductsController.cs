@@ -12,7 +12,7 @@ namespace StarDMS.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(Roles = "admin")]
+    // [Authorize(Roles = "admin")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductsRepo _repo;
@@ -23,7 +23,7 @@ namespace StarDMS.Controllers
 
         [HttpGet]
         [Route("GetProduct")]
-        [Authorize(Roles = "admin,seller")]
+        [Authorize]
         public async Task<IActionResult> GetProduct(string barcode)
         {
             if (barcode.Length != 13)
@@ -40,6 +40,7 @@ namespace StarDMS.Controllers
 
         [HttpGet]
         [Route("GetProducts")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetProducts(int rq, int c)
         {
             if (rq * c < 0)
@@ -56,11 +57,12 @@ namespace StarDMS.Controllers
 
         [HttpPost]
         [Route("Add")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> AddProduct([FromBody]ProductAddDto newP)
         {
             if (!ModelState.IsValid)
-                return BadRequest("Səhv özəlliklər daxil edilib.");
-            
+                return BadRequest("Səhv özəlliklər daxil edilib." + ModelState);
+
             var result = await _repo.AddProduct(newP);
             if (result.IsSucces)
             {
@@ -72,6 +74,7 @@ namespace StarDMS.Controllers
 
         [HttpPost]
         [Route("AddMultiple")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> AddMultiple([FromBody]List<ProductAddDto> newPs)
         {
             if (!ModelState.IsValid)
@@ -88,6 +91,7 @@ namespace StarDMS.Controllers
 
         [HttpPost]
         [Route("Update")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Update([FromBody]Product p)
         {
             if (!ModelState.IsValid)
@@ -104,6 +108,7 @@ namespace StarDMS.Controllers
 
         [HttpPost]
         [Route("Delete")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(string barcode)
         {
             if (barcode.Length != 13)
@@ -120,6 +125,7 @@ namespace StarDMS.Controllers
     
         [HttpGet]
         [Route("GetEmptyStocks")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetEmptyStocks()
         {
             var result = await _repo.GetEmptyStocks();

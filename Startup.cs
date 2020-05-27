@@ -16,7 +16,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using StarDMS.Data;
 using StarDMS.Repos.Auth;
+using StarDMS.Repos.FirmsRepo;
 using StarDMS.Repos.Products;
+using MySql.Data.EntityFrameworkCore.Extensions;
 
 namespace StarDMS
 {
@@ -59,9 +61,11 @@ namespace StarDMS
                         )
                     };
                 });
+
             services.AddDbContext<StarDMSContext>(options =>
             {
-                options.UseSqlite(Configuration["ConStrs:Sqlite"]);
+                // options.UseMySQL(Configuration["ConStrs:Mysql"]);
+                options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
             });
 
             services.AddControllers();
@@ -69,6 +73,7 @@ namespace StarDMS
             // Dependencies:
             services.AddScoped<IAuthRepo, AuthRepo>();
             services.AddScoped<IProductsRepo, ProductsRepo>();
+            services.AddScoped<IFirmsRepo, FirmsRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +84,7 @@ namespace StarDMS
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
             

@@ -88,9 +88,11 @@ namespace StarDMS.Controllers
         [HttpGet]
         [Route("VerifySeller")]
         [Authorize(Roles = "seller")]
-        public IActionResult VerifySeller()
-        {
-            return Ok();
-        }
+        public IActionResult VerifySeller() => Ok();
+
+        [HttpGet]
+        [Route("VerifyAdmin")]
+        [Authorize(Roles = "admin")]
+        public IActionResult VerifyAdmin() => Ok();
     }
 }

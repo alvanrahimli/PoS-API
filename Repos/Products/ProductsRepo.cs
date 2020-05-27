@@ -163,21 +163,40 @@ namespace StarDMS.Repos.Products
             {
                 Content = null,
                 IsSucces = true,
-                Message = "Bütün məhsullar bazaya əlavə olundu."
+                Message = "Bütün məhsullar bazaya əlavə olundu. Təkrarlanan barkodlu məhsulların (əgər varsa) sayı artırıldı"
             };
         }
 
         public async Task<RepoResponse<ProductReturnDto>> AddProduct(ProductAddDto np)
         {
-            var oldP = await GetProduct(np.Barcode);
-            if (oldP.IsSucces)
+            var oldP = await _context.Products
+                .Include(p => p.Firm)
+                .FirstOrDefaultAsync(p => p.Barcode == np.Barcode);
+            if (oldP != null)
             {
-                return new RepoResponse<ProductReturnDto>()
+                oldP.Count += np.Count;
+                var res = await _context.SaveChangesAsync();
+                if (res > 0)
                 {
-                    Content = oldP.Content,
-                    IsSucces = false,
-                    Message = "Bu barkodla bazada məhsul mövcuddur."
-                };
+                    return new RepoResponse<ProductReturnDto>()
+                    {
+                        Content = new ProductReturnDto()
+                        {
+                            Id = oldP.Id,
+                            Barcode = oldP.Barcode,
+                            Count = oldP.Count,
+                            Details = oldP.Details,
+                            EntryDate = oldP.EntryDate,
+                            FirmId = oldP.FirmId,
+                            FirmName = oldP.Firm.Name,
+                            Name = oldP.Name,
+                            PurchasePrice = oldP.PurchasePrice,
+                            SalePrice = oldP.SalePrice
+                        },
+                        IsSucces = true,
+                        Message = "Bu barkodla bazada məhsul mövcuddur. Məhsulun sayı artırıldı."
+                    };
+                }
             }
 
             var newProduct = new Product()
