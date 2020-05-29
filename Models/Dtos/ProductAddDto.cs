@@ -17,7 +17,7 @@ namespace StarDMS.Models.Dtos
         public DateTime EntryDate { get; set; }
         [Required]
         public Guid FirmId { get; set; }
-        public decimal PurchasePrice { get; set; }
-        public decimal SalePrice { get; set; }
+        public int PurchasePrice { get; set; }
+        public int SalePrice { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace StarDMS.Models
         [Required]
         public DateTime IssueDate { get; set; }
         [Required]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
         [Required]
         public string Description { get; set; } // Special formatted string
         [ForeignKey("IssuerId")]

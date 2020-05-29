@@ -65,7 +65,7 @@ namespace StarDMS
             services.AddDbContext<StarDMSContext>(options =>
             {
                 // options.UseMySQL(Configuration["ConStrs:Mysql"]);
-                options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
+                options.UseSqlServer(Configuration.GetConnectionString("Mssql"));
             });
 
             services.AddControllers();

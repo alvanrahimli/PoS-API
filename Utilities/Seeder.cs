@@ -44,8 +44,8 @@ namespace StarDMS.Utilities
                     EntryDate = DateTime.Now.AddDays(1),
                     FirmId = cocacola,
                     Name = "Kola 1L",
-                    PurchasePrice = 0.9m,
-                    SalePrice = 1m,
+                    PurchasePrice = 90,
+                    SalePrice = 100,
                     Count = 150
                 },
                 new Product()
@@ -57,8 +57,8 @@ namespace StarDMS.Utilities
                     EntryDate = DateTime.Now.AddDays(2),
                     FirmId = cocacola,
                     Name = "Fanta 2.5L",
-                    PurchasePrice = 1.62m,
-                    SalePrice = 1.7m,
+                    PurchasePrice = 162,
+                    SalePrice = 170,
                     Count = 220
                 },
                 new Product()
@@ -70,8 +70,8 @@ namespace StarDMS.Utilities
                     EntryDate = DateTime.Now.AddDays(2),
                     FirmId = seba,
                     Name = "Qatiq 1kq",
-                    PurchasePrice = 1.1m,
-                    SalePrice = 1.2m,
+                    PurchasePrice = 110,
+                    SalePrice = 120,
                     Count = 12
                 }
             );
